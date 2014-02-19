@@ -4,7 +4,7 @@
 
   <groupId>org.malte</groupId>
   <artifactId>malte-m1</artifactId>
-  <version>0.0.1.0</version>
+  <version>0.0.2.0</version>
   <packaging>jar</packaging>
 
   <name>malte-m1</name>
@@ -24,7 +24,7 @@
     <dependency>
         <groupId>org.malte</groupId>
         <artifactId>malte-base</artifactId>
-        <version>0.0.1.0</version>
+        <version>0.0.2.0</version>
         <scope>provided</scope>
     </dependency>
   </dependencies>

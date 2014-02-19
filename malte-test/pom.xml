@@ -4,7 +4,7 @@
 
   <groupId>org.malte</groupId>
   <artifactId>malte-test</artifactId>
-  <version>0.0.1.0</version>
+  <version>0.0.2.0</version>
   <packaging>war</packaging>
 
   <name>malte-test</name>
@@ -15,15 +15,16 @@
   </properties>
 
   <dependencies>
+     
       <dependency>
       <groupId>org.malte</groupId>
       <artifactId>malte-base</artifactId>
-      <version>0.0.1.0</version>
+      <version>0.0.2.0</version>
     </dependency>
      <dependency>
       <groupId>org.malte</groupId>
       <artifactId>malte-m1</artifactId>
-      <version>0.0.1.0</version>
+      <version>0.0.2.0</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
