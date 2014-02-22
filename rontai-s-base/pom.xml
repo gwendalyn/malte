@@ -1,21 +1,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.malte</groupId>
-	<artifactId>malte-base</artifactId>
-	<version>0.0.2.0</version>
-	<packaging>jar</packaging>
+  <groupId>org.rontai</groupId>
+  <artifactId>rontai-s-base</artifactId>
+  <version>0.0.1.0</version>
+  <packaging>jar</packaging>
 
-	<name>malte-base</name>
-	<url>http://maven.apache.org</url>
+  <name>rontai-s-base</name>
+  <url>http://maven.apache.org</url>
 
-	<properties>
-		<org.springframework.version>3.2.4.RELEASE</org.springframework.version>
+  <properties>
+    <org.springframework.version>3.2.4.RELEASE</org.springframework.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
-	<repositories>
+  </properties>
+  
+  <repositories>
 	
 		<repository>
 			<id>prime-repo</id>
@@ -26,8 +26,8 @@
 
 	</repositories>
 
-	<dependencies>
-		<dependency>
+  <dependencies>
+    <dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
@@ -80,8 +80,8 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>3.6.10.Final</version>
 		</dependency>
-	</dependencies>
-	<build>
+  </dependencies>
+  <build>
 		<finalName>${project.name}-${project.version}</finalName>
 
 		<plugins>
@@ -96,5 +96,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

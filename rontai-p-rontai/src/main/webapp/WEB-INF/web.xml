@@ -8,6 +8,12 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
 		<param-value>Production</param-value>
 	</context-param>
+	<listener>
+	    <listener-class>
+	        org.rontai.s.base.SpringContext
+	    </listener-class>
+	    
+	</listener>
 <!-- 	<context-param> -->
 <!-- 		<param-name>org.jboss.jbossfaces.WAR_BUNDLES_JSF_IMPL</param-name> -->
 <!-- 		<param-value>true</param-value> -->
@@ -22,10 +28,6 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 		<url-pattern>/faces/*</url-pattern>
 	</servlet-mapping>
 	
-	<servlet-mapping>
-	    <servlet-name>Faces Servlet</servlet-name>
-	    <url-pattern>/*.xhtml</url-pattern>
-	</servlet-mapping>
 	<servlet>
 		<servlet-name>SEE PUSH</servlet-name>
 		<servlet-class>org.malte.servlet.SimpleServlet</servlet-class>
