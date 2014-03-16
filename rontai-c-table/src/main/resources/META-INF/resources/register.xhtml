@@ -22,7 +22,7 @@
 			<tr>
 				<td>Last Name:</td>
 				<td><h:inputText label="Last Name" id="lname"
-						value="#{userBean.test}" required="true" /> <h:message
+						value="#{userBean.lastName}" required="true" /> <h:message
 						for="lname" /></td>
 			</tr>
 			<tr>
@@ -43,9 +43,9 @@
 			<tr>
 				<td>Email Address:</td>
 				<td><h:inputText label="Email Address" id="email"
-						value="#{userBean.email}" required="true">
-						<f:validateRegex pattern="\w@\w" />
-					</h:inputText> <h:message for="email" /></td>
+						value="#{userBean.email}" required="true"
+						validator="#{userBean.validateEmail}" /> <h:message for="email" />
+				</td>
 			</tr>
 			<tr>
 				<td>Service Level:</td>
@@ -62,10 +62,9 @@
 			<h:messages />
 		</p>
 		<p>
-			<h:commandButton value="Register" action="confirm"
-				actionListener="#{userBean.doSave}" >
-				<f:attribute name="attr1" value="321" />
-				</h:commandButton>
+			<h:commandButton value="Register" action="confirm" actionListener="#{userBean.doSave}" >
+			<f:attribute name="attr1" value="321" />
+			</h:commandButton>
 			<h:commandButton immediate="true" value="Cancel" action="main" />
 		</p>
 	</h:form>

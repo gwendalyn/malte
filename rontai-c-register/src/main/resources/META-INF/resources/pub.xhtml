@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "htth://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>A Simple JavaServer Faces Registration Application</title>
+</h:head>
+<h:body>
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="west" size="200" header="Left"
+			resizable="true" closable="true" collapsible="true">
+			<h:form>
+				<p:menu>
+					<p:submenu label="融资相关" icon="ui-icon-refresh">
+						<p:menuitem value="发布融资信息" icon="ui-icon-disk" />
+						<p:menuitem value="查看已发布信息" icon="ui-icon-arrowrefresh-1-w" />
+					</p:submenu>
+					<p:submenu label="投资相关" icon="ui-icon-newwin">
+						<p:menuitem value="发布投资意向" icon="ui-icon-disk" />
+						<p:menuitem value="查看已发布意向" icon="ui-icon-arrowrefresh-1-w" />
+
+					</p:submenu>
+					<p:separator />
+					<p:submenu label="Navigations" icon="ui-icon-extlink">
+						<p:submenu label="Prime Links">
+							<p:menuitem value="Prime" url="http://www.prime.com.tr" />
+							<p:menuitem value="PrimeFaces" url="http://www.primefaces.org" />
+						</p:submenu>
+						<p:menuitem value="Mobile" url="/mobile" />
+					</p:submenu>
+				</p:menu>
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+			<h:panelGroup rendered="true" style="width:100%;">
+				<p:dataList value="#{dataList.infos}" var="info" style="width:100%" type="none">
+					<p:panelGrid columns="2" style="width:100%;">
+						<h:outputText value="#{info.name}" />
+						<h:outputText value="#{info.description}" />
+					</p:panelGrid>
+				</p:dataList>
+			</h:panelGroup>
+			<h:panelGroup rendered="false">
+			</h:panelGroup>
+		</p:layoutUnit>
+
+	</p:layout>
+
+
+</h:body>
+</html>

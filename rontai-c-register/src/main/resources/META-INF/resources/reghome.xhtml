@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "htth://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>A Simple JavaServer Faces Registration Application</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:commandButton value="注册" immediate="true" rendered="true"
+			onclick="regDlg.show()" />
+	</h:form>
+
+	<h:form id="display">
+		<p:panelGrid columns="2" rendered="#{registerInfo.display}">
+			<h:outputText value="username" />
+			<h:outputText value="#{registerInfo.currentUser.username}" />
+
+			<h:outputText value="password" />
+			<h:outputText value="#{registerInfo.currentUser.password}" />
+		</p:panelGrid>
+	</h:form>
+
+
+	<p:dialog id="regDialog" header="Modal Dialog" widgetVar="regDlg"
+		modal="true" height="100">
+		<h:form id="regForm">
+			<p:panelGrid columns="2">
+				<p:outputLabel for="userNameInput" value="username" />
+				<h:panelGroup>
+					<p:inputText id="userNameInput"
+						value="#{registerInfo.currentUser.username}" required="true" />
+					<p:message for="userNameInput" />
+				</h:panelGroup>
+
+				<p:outputLabel for="passwordInput" value="password" />
+				<h:panelGroup>
+					<p:password id="passwordInput"
+						value="#{registerInfo.currentUser.password}" feedback="false"
+						required="true">
+						<p:ajax />
+					</p:password>
+					<p:message for="passwordInput" />
+				</h:panelGroup>
+
+				<p:outputLabel for="passwordInput2" value="passwordConfirm" />
+				<h:panelGroup>
+					<p:password id="passwordInput2" value="#{flash.password}"
+						validator="#{registerInfo.validatePassword}"
+						validatorMessage="XXX" feedback="false" required="true" />
+					<p:message for="passwordInput2" />
+				</h:panelGroup>
+			</p:panelGrid>
+
+			<p:commandButton value="submit"
+				actionListener="#{registerInfo.doSave}" update=":display :regForm">
+				<f:attribute name="DLG_ID" value="regDlg" />
+			</p:commandButton>
+		</h:form>
+	</p:dialog>
+
+
+</h:body>
+</html>

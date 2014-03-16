@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "htth://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>User List</title>
+</h:head>
+<h:body>
+
+	<!-- menu bar -->
+	<h:form id="menuListMenuBar">
+		<p:menubar>
+			<p:menuitem value="新增" update=":createEditForm"
+				actionListener="#{menuPageBean.doShowNewEvent}">
+				<f:attribute name="DLG_VAR" value="createEditDlg" />
+			</p:menuitem>
+		</p:menubar>
+	</h:form>
+
+	<h:form id="tableForm">
+		<p:dataTable var="menu" value="#{menuPageBean.menus}">
+
+			<p:column headerText="DB ID">
+				<h:outputText value="#{menu.id}" />
+			</p:column>
+
+			<p:column headerText="Code">
+				<h:outputText value="#{menu.code}" />
+			</p:column>
+
+			<p:column headerText="Label">
+				<h:outputText value="#{menu.label}" />
+			</p:column>
+
+			<p:column headerText="Icon">
+				<h:outputText value="#{menu.icon}" />
+			</p:column>
+
+			<p:column headerText="Is_Item">
+				<h:outputText value="#{menu.isItem}" />
+			</p:column>
+
+			<p:column headerText="Outcome">
+				<h:outputText value="#{menu.outcome}" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+
+	<p:dialog widgetVar="createEditDlg">
+		<h:form id="createEditForm">
+			<p:panelGrid columns="2">
+				<p:outputLabel value="菜单是否为功能按钮" for="ceMenuIsItem"></p:outputLabel>
+				<p:selectOneButton id="ceMenuIsItem" required="true"
+					value="#{menuPageBean.current.isItem}">
+					<p:ajax update=":createEditForm" listener="#{menuPageBean.doAjaxEvent}"></p:ajax>
+					<f:selectItem itemLabel="是" itemValue="true" />
+					<f:selectItem itemLabel="不是" itemValue="false" />
+				</p:selectOneButton>
+				<p:outputLabel value="菜单代码" for="ceMenuCode"></p:outputLabel>
+				<p:inputText id="ceMenuCode" value="#{menuPageBean.current.code}" required="true"/>
+				<p:outputLabel value="菜单标签" for="ceMenuLabel"></p:outputLabel>
+				<p:inputText id="ceMenuLabel" value="#{menuPageBean.current.label}" required="true"/>
+				<p:outputLabel value="菜单图标" for="ceMenuIcon"></p:outputLabel>
+				<p:inputText id="ceMenuIcon" value="#{menuPageBean.current.icon}" />
+				<p:outputLabel value="菜单目标"
+					rendered="#{menuPageBean.current.isItem}" for="ceMenuOutcome"
+					id="ceMenuOutcomeLabel"></p:outputLabel>
+				<p:inputText id="ceMenuOutcome"
+					rendered="#{menuPageBean.current.isItem}"
+					value="#{menuPageBean.current.outcome}" />
+			</p:panelGrid>
+			<h:panelGroup>
+				<p:commandButton value="确定" update=":tableForm"
+					actionListener="#{menuPageBean.doSaveEvent}">
+					<f:attribute name="DLG_VAR" value="createEditDlg" />
+				</p:commandButton>
+				<p:commandButton value="取消" actionListener="#{menuPageBean.doCancelEvent}">
+					<f:attribute name="DLG_VAR" value="createEditDlg" />
+				</p:commandButton>
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</h:body>
+</html>
