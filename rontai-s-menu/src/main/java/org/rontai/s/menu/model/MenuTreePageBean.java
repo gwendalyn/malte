@@ -32,6 +32,10 @@ public class MenuTreePageBean implements Serializable {
 	private MenuNode current;
 	
 	private TreeNode currentRoot;
+	
+	private MenuNode child;
+	
+	private MenuNode parent;
 
 	public MenuTreePageBean(){
 		initService();
@@ -102,6 +106,26 @@ public class MenuTreePageBean implements Serializable {
 
 	public TreeNode getCurrentRoot() {
 		return currentRoot;
+	}
+
+	public MenuNode getChild() {
+		return child;
+	}
+
+	public void setChild(MenuNode child) {
+		this.child = child;
+	}
+
+	public MenuNode getParent() {
+		return parent;
+	}
+
+	public void setParent(MenuNode parent) {
+		this.parent = parent;
+	}
+
+	public void setCurrentRoot(TreeNode currentRoot) {
+		this.currentRoot = currentRoot;
 	}
 	
 }

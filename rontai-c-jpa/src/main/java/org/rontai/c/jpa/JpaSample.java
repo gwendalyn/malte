@@ -18,7 +18,8 @@ public class JpaSample {
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
 		ctx.load("classpath:spring-module-context.xml");
 		ctx.refresh();
-
+		
+		testListContactsWithDetail(ctx);
 		// Contact summary with untype result
 //		ContactSummaryUntypeImpl contactSummaryUntype = ctx.getBean(
 //				"contactSummaryUntype", ContactSummaryUntypeImpl.class);
@@ -26,7 +27,7 @@ public class JpaSample {
 
 	}
 
-	private void testListContactsWithDetail(GenericXmlApplicationContext ctx) {
+	private static void testListContactsWithDetail(GenericXmlApplicationContext ctx) {
 		ContactService contactService = ctx.getBean("jpaContactService",
 				ContactService.class);
 

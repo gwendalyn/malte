@@ -8,10 +8,17 @@
 		<version>0.0.1</version>
 	</parent>
 
-	<artifactId>rontai-p-template</artifactId>
-	<packaging>war</packaging>
+	<groupId>org.rontai</groupId>
+	<artifactId>rontai-c-test</artifactId>
+	<version>0.0.1</version>
+	<packaging>jar</packaging>
 
-	<name>rontai-p-template</name>
+	<name>rontai-c-test</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -24,21 +31,7 @@
 			<groupId>org.rontai</groupId>
 			<artifactId>rontai-s-base</artifactId>
 			<version>0.0.1.0</version>
+			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.rontai</groupId>
-			<artifactId>rontai-s-authority</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.rontai</groupId>
-			<artifactId>rontai-s-menu</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.rontai</groupId> -->
-<!-- 			<artifactId>rontai-c-test</artifactId> -->
-<!-- 			<version>0.0.1</version> -->
-<!-- 		</dependency> -->
 	</dependencies>
 </project>
