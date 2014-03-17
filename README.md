@@ -8,6 +8,7 @@ malte
 3. 打开eclipse -- Help -- Eclipse MarketPlace 搜索 Maven Integration for Eclipse 安装所有内容<br>
 
 17-3-2014<br>
+有效页面包括：{context}/faces/menu_list.xhtml  menutree_list.xhtml user_list.xhtml
 更新项目架构：<br>
 1.采用rontai-parent来作为parent <br>
 2.项目暂时变成 rontai-parent + rontai-s-base + <br>
