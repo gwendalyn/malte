@@ -21,20 +21,25 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-		    <groupId>org.rontai</groupId>
+			<groupId>org.rontai</groupId>
 			<artifactId>rontai-s-base</artifactId>
 			<version>0.0.1.0</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.rontai</groupId>
+			<groupId>org.rontai</groupId>
 			<artifactId>rontai-s-authority</artifactId>
 			<version>0.0.1</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.rontai</groupId>
+			<groupId>org.rontai</groupId>
 			<artifactId>rontai-s-menu</artifactId>
 			<version>0.0.1</version>
 		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.rontai</groupId> -->
+<!-- 			<artifactId>rontai-c-test</artifactId> -->
+<!-- 			<version>0.0.1</version> -->
+<!-- 		</dependency> -->
 		
 		<!-- mysql jdbc -->
 		<dependency>

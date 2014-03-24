@@ -1,4 +1,4 @@
-package org.rontai.p.template;
+package org.rontai.c.test;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
