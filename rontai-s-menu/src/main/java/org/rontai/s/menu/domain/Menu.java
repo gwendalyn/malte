@@ -16,12 +16,12 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  * 
  * 
  * @author glenlivet
- *
+ * 
  */
 @Entity
 @Table(name = "S_MENU_MENU")
-public class Menu implements Serializable{
-	
+public class Menu implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -34,28 +34,28 @@ public class Menu implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
-	
+
 	@Column(name = "CODE")
 	private String code;
-	
+
 	/**
 	 * menu label
 	 */
 	@Column(name = "LABEL")
 	private String label;
-	
+
 	/**
 	 * menu icon
 	 */
 	@Column(name = "ICON")
 	private String icon;
-	
+
 	/**
 	 * menu outcome
 	 */
 	@Column(name = "OUTCOME")
 	private String outcome;
-	
+
 	/**
 	 * is menu item
 	 */
@@ -101,9 +101,7 @@ public class Menu implements Serializable{
 	public void setIsItem(Boolean isItem) {
 		this.isItem = isItem;
 	}
-	
-	
-	
+
 	public String getCode() {
 		return code;
 	}
@@ -114,10 +112,9 @@ public class Menu implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder(17, 31).append(code)
-				.toHashCode();
+		return new HashCodeBuilder(17, 31).append(code).toHashCode();
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null)
@@ -128,8 +125,12 @@ public class Menu implements Serializable{
 			return false;
 		}
 		Menu o = (Menu) obj;
-		return new EqualsBuilder().append(code, o.code)
-				.isEquals();
+		return new EqualsBuilder().append(code, o.code).isEquals();
 	}
-	
+
+	@Override
+	public String toString() {
+		return this.getLabel();
+	}
+
 }

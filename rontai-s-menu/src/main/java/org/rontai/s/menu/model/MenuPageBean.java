@@ -4,14 +4,17 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.ComponentSystemEvent;
 
 import org.primefaces.context.RequestContext;
-import org.rontai.s.menu.MenuUtil;
 import org.rontai.s.menu.domain.Menu;
 import org.rontai.s.menu.service.MenuService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @ManagedBean
 @ViewScoped
@@ -19,14 +22,18 @@ public class MenuPageBean implements Serializable{
 	
 	private static final long serialVersionUID = -3094847472186606739L;
 
-	private static MenuService menuService;
+	@ManagedProperty(value="#{sMenuMenuService}")
+	private MenuService menuService;
 	
 	private Menu current;
 	
 	private List<Menu> menus;
 	
 	public MenuPageBean() {
-		initService();
+		
+	}
+	
+	public void loadData(ComponentSystemEvent event){
 		menus = menuService.findAll();
 	}
 	
@@ -62,11 +69,6 @@ public class MenuPageBean implements Serializable{
 		current = null;
 	}
 
-	private static synchronized void initService() {
-		if(menuService == null)
-			menuService = MenuUtil.getMenuService();
-	}
-
 	public Menu getCurrent() {
 		return current;
 	}
@@ -81,6 +83,14 @@ public class MenuPageBean implements Serializable{
 
 	public void setMenus(List<Menu> menus) {
 		this.menus = menus;
+	}
+
+	public MenuService getMenuService() {
+		return menuService;
+	}
+
+	public void setMenuService(MenuService menuService) {
+		this.menuService = menuService;
 	}
 	
 }

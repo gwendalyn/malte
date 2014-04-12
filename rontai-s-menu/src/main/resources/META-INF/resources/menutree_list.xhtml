@@ -10,18 +10,20 @@
 </h:head>
 <h:body>
 
-	<!-- menu bar -->
-	<h:form id="menuListMenuBar">
-		<p:menubar>
-			<p:menuitem value="新增" update=":createRootForm"
-				actionListener="#{menuTreePageBean.doShowNewEvent}">
-				<f:attribute name="DLG_VAR" value="createRootDlg" />
-			</p:menuitem>
-		</p:menubar>
-	</h:form>
+	<f:event listener="#{menuPageBean.loadData}" type="preRenderView" />
+	<f:event listener="#{menuTreePageBean.loadData}" type="preRenderView" />
 
 	<h:form id="tableForm">
-		<p:dataTable var="menu" value="#{menuTreePageBean.menuNodes}">
+		<p:menubar>
+			<p:menuitem value="新增" update=":createRootForm"
+				onsuccess="PF('createRootDlg').show();"
+				actionListener="#{menuTreePageBean.doShowNewEvent}">
+			</p:menuitem>
+		</p:menubar>
+		<p:menubar model="#{menuTreePageBean.menubarModel}" />
+		<p:dataTable var="menu" value="#{menuTreePageBean.menuNodes}"
+			rowKey="#{menu.code}" selection="#{menuTreePageBean.selected}"
+			selectionMode="single">
 
 			<p:column headerText="DB ID">
 				<h:outputText value="#{menu.id}" />
@@ -32,9 +34,9 @@
 			</p:column>
 
 			<p:column headerText="Label">
-				<h:outputText value="#{menu.menu.label}" />
+				<h:outputText value="#{menu.label}" />
 			</p:column>
-			
+
 		</p:dataTable>
 	</h:form>
 
@@ -48,7 +50,7 @@
 				<p:autoComplete value="#{menuTreePageBean.current.menu}" id="ceMenu"
 					completeMethod="#{menuTreePageBean.completeMenu}" var="m"
 					itemLabel="#{m.label}" itemValue="#{m}"
-					converter="org.rontai.s.menu.menuconverter" forceSelection="true">
+					converter="#{menuConverter}" forceSelection="true">
 					<p:column>
 						#{m.label}
 					</p:column>
@@ -58,20 +60,88 @@
 				</p:autoComplete>
 			</p:panelGrid>
 			<h:panelGroup>
-				<p:commandButton value="确定" update=":tableForm"
-					actionListener="#{menuTreePageBean.doSaveHeadMenuEvent}">
-					<f:attribute name="DLG_VAR" value="createRootDlg" />
+				<p:commandButton value="确定" update=":treesForm"
+					onsuccess="PF('createRootDlg').hide();PF('treesDlg').show();"
+					actionListener="#{menuTreePageBean.beforeShowTreePanel}">
 				</p:commandButton>
-				<p:commandButton value="取消"
-					actionListener="#{menuTreePageBean.doCancelEvent}">
-					<f:attribute name="DLG_VAR" value="createRootDlg" />
+				<p:commandButton value="取消" immediate="true"
+					onsuccess="PF('createRootDlg').hide();">
 				</p:commandButton>
 			</h:panelGroup>
 
 		</h:form>
 	</p:dialog>
 
+	<p:dialog widgetVar="createMenuNodeDlg">
+		<h:form id="createMenuNodeForm">
+			<p:panelGrid columns="2">
+				<p:outputLabel value="菜单资源代码" for="ceMenuCode"></p:outputLabel>
+				<p:inputText id="ceMenuCode"
+					value="#{menuTreePageBean.treePanel.current.code}" required="true" />
+				<p:outputLabel value="对应菜单" for="ceMenu"></p:outputLabel>
+				<p:autoComplete value="#{menuTreePageBean.treePanel.current.menu}"
+					id="ceMenu" completeMethod="#{menuTreePageBean.completeMenu}"
+					var="m" itemLabel="#{m.label}" itemValue="#{m}"
+					converter="#{menuConverter}" forceSelection="true">
+					<p:column>
+						#{m.label}
+					</p:column>
+					<p:column>  
+                      #{m.code}
+                </p:column>
+				</p:autoComplete>
+			</p:panelGrid>
+			<h:panelGroup>
+				<p:commandButton value="确定" update=":treesForm"
+					onsuccess="PF('createMenuNodeDlg').hide();"
+					actionListener="#{menuTreePageBean.treePanel.createNewResource}">
+				</p:commandButton>
+				<p:commandButton value="取消" immediate="true"
+					onsuccess="PF('createMenuNodeDlg').hide();">
+				</p:commandButton>
+			</h:panelGroup>
 
+		</h:form>
+	</p:dialog>
+
+	<p:dialog widgetVar="treesDlg">
+		<h:form id="treesForm">
+			<h:panelGrid columns="3">
+				<h:outputText value="菜单节点资源" />
+				<h:outputText value="" />
+				<h:outputText value="#{menuTreePageBean.current.menu.label}" />
+				<p:tree id="tree1" value="#{menuTreePageBean.treePanel.resources}"
+					var="n" selectionMode="single"
+					selection="#{menuTreePageBean.treePanel.selectedResource}"
+					draggable="true" droppable="true" dragdropScope="menuTrees">
+					<p:treeNode>
+						<h:outputText value="#{n}" />
+					</p:treeNode>
+				</p:tree>
+
+				<p:graphicImage alt="Transfer" url="img/transfer.png" />
+
+				<p:tree id="tree2" value="#{menuTreePageBean.treePanel.menubar}"
+					var="menu" selectionMode="single"
+					selection="#{menuTreePageBean.treePanel.selectedMenuNode}"
+					draggable="true" droppable="true" dragdropScope="menuTrees">
+					<p:treeNode>
+						<h:outputText value="#{menu}" />
+					</p:treeNode>
+				</p:tree>
+			</h:panelGrid>
+			<p:commandButton value="新增菜单节点" immediate="true"
+				update=":createMenuNodeForm"
+				onsuccess="PF('createMenuNodeDlg').show();"
+				actionListener="#{menuTreePageBean.treePanel.beforeShowNewResourceDialog}">
+			</p:commandButton>
+			<p:commandButton value="保存" onsuccess="PF('treesDlg').hide();"
+				update=":tableForm"
+				actionListener="#{menuTreePageBean.treePanel.saveMenu}">
+			</p:commandButton>
+
+		</h:form>
+	</p:dialog>
 </h:body>
 </html>
 

@@ -6,18 +6,29 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 	<description>Simple Registration Application</description>
 	<context-param>
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
-		<param-value>Production</param-value>
+		<param-value>Development</param-value>
 	</context-param>
+	<context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring-context.xml</param-value>
+  </context-param>
+	 <!-- Add Support for Spring -->
+  <listener>
+	<listener-class>
+		org.springframework.web.context.ContextLoaderListener
+	</listener-class>
+  </listener>
+  <listener>
+	<listener-class>
+		org.springframework.web.context.request.RequestContextListener
+	</listener-class>
+  </listener>
 	<listener>
 	    <listener-class>
 	        org.rontai.s.base.SpringContext
 	    </listener-class>
-	    
 	</listener>
-<!-- 	<context-param> -->
-<!-- 		<param-name>org.jboss.jbossfaces.WAR_BUNDLES_JSF_IMPL</param-name> -->
-<!-- 		<param-value>true</param-value> -->
-<!-- 	</context-param> -->
+
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -27,5 +38,9 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>/faces/*</url-pattern>
 	</servlet-mapping>
+	
+	<welcome-file-list>
+     <welcome-file>faces/index.xhtml</welcome-file>
+   </welcome-file-list>
 	
 </web-app>

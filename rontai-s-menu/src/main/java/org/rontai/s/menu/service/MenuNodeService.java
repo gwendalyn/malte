@@ -13,5 +13,7 @@ public interface MenuNodeService {
 	public void save(MenuNode menuNode);
 	
 	public void delete(MenuNode menuNode);
+	
+	public List<MenuNode> findByParent(MenuNode parent);
 
 }

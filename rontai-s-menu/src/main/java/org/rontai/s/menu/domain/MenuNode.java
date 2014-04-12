@@ -20,7 +20,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @Entity
 @Table(name = "S_MENU_MENUNODE")
-public class MenuNode implements Serializable{
+public class MenuNode implements Serializable {
 
 	/**
 	 * 
@@ -44,19 +44,12 @@ public class MenuNode implements Serializable{
 	/**
 	 * sub nodes
 	 */
-//	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//	@JoinTable(name = "S_MENU_MENUNODE_RELATION", 
-//	joinColumns = { @JoinColumn(name = "PARENT_CODE", referencedColumnName = "CODE") }, 
-//	inverseJoinColumns = { @JoinColumn(name = "CHILD_CODE", referencedColumnName = "CODE", unique = true) })
-//	private List<MenuNode> subNodes;
-	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PARENT_CODE", referencedColumnName = "CODE")
 	private MenuNode parent;
-	
+
 	@OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<MenuNode> subNodes;
-	
 
 	/**
 	 * contained menu
@@ -76,6 +69,9 @@ public class MenuNode implements Serializable{
 	 */
 	@Column(name = "HEAD_NODE")
 	private Boolean headNode;
+	
+	@Column(name = "LABEL")
+	private String label;
 
 	public Long getId() {
 		return id;
@@ -99,6 +95,14 @@ public class MenuNode implements Serializable{
 
 	public void setSubNodes(List<MenuNode> subNodes) {
 		this.subNodes = subNodes;
+		for(MenuNode n : subNodes){
+			n.setParent(this);
+		}
+	}
+	
+	public void addSubNode(MenuNode subNode){
+		this.subNodes.add(subNode);
+		subNode.setParent(this);
 	}
 
 	public Menu getMenu() {
@@ -107,6 +111,7 @@ public class MenuNode implements Serializable{
 
 	public void setMenu(Menu menu) {
 		this.menu = menu;
+		this.label = menu.getLabel();
 	}
 
 	public Boolean getBtmNode() {
@@ -132,13 +137,20 @@ public class MenuNode implements Serializable{
 	public void setCode(String code) {
 		this.code = code;
 	}
-	
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder(17, 31).append(code)
-				.toHashCode();
+		return new HashCodeBuilder(17, 31).append(code).toHashCode();
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null)
@@ -149,8 +161,11 @@ public class MenuNode implements Serializable{
 			return false;
 		}
 		MenuNode o = (MenuNode) obj;
-		return new EqualsBuilder().append(code, o.code)
-				.isEquals();
+		return new EqualsBuilder().append(code, o.code).isEquals();
 	}
-
+	
+	@Override
+	public String toString() {
+		return this.getLabel();
+	}
 }

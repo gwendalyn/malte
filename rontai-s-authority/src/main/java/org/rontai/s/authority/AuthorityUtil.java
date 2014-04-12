@@ -6,6 +6,6 @@ import org.rontai.s.base.SpringContext;
 public class AuthorityUtil {
 
 	public static UserService getUserService(){
-		return SpringContext.context.getBean(UserService.SPRING_KEY, UserService.class);
+		return SpringContext.getApplicationContext().getBean(UserService.SPRING_KEY, UserService.class);
 	}
 }

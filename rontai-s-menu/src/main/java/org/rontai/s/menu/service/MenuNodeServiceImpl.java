@@ -35,4 +35,9 @@ public class MenuNodeServiceImpl implements MenuNodeService {
 		this.menuNodeRepository = menuNodeRepository;
 	}
 
+	@Override
+	public List<MenuNode> findByParent(MenuNode parent) {
+		return menuNodeRepository.findByParent(parent);
+	}
+
 }

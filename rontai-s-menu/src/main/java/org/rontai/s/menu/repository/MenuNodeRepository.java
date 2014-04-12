@@ -10,5 +10,7 @@ public interface MenuNodeRepository extends CrudRepository<MenuNode, Long> {
 	
 	@Query("select n from MenuNode n where n.headNode = true")
 	public List<MenuNode> findAllHeadNode();
+	
+	public List<MenuNode> findByParent(MenuNode parent);
 
 }

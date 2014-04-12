@@ -1,5 +1,7 @@
 package org.rontai.s.authority.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +20,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  */
 @Entity
 @Table(name = "S_AUTHORITY_RESOURCE")
-public class Resource {
+public class Resource implements Serializable {
+
+	private static final long serialVersionUID = 5058293948896304999L;
 
 	public static final Integer TYPE_MENUBAR = 5;
 	

@@ -16,7 +16,7 @@ public class TableBean {
 	private List<Car> carsSmall;
 	
 	public TableBean(){
-		HelloWorld hw = (HelloWorld)SpringContext.context.getBean("helloWorld");
+		HelloWorld hw = (HelloWorld)SpringContext.getApplicationContext().getBean("helloWorld");
 		hw.shout();
 	}
 	

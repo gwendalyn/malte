@@ -1,5 +1,6 @@
 package org.rontai.s.authority.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -24,8 +25,10 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  */
 @Entity
 @Table(name = "S_AUTHORITY_ROLE")
-public class Role {
-	
+public class Role implements Serializable{
+
+	private static final long serialVersionUID = 4495506567756267489L;
+
 	/**
 	 * 游客
 	 */
