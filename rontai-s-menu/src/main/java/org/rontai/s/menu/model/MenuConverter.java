@@ -1,20 +1,22 @@
 package org.rontai.s.menu.model;
 
-import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.rontai.s.menu.domain.Menu;
 import org.rontai.s.menu.service.MenuService;
+import org.springframework.context.annotation.Scope;
 
-@ManagedBean
-@ApplicationScoped
+@Named
+@Scope("session")
 public class MenuConverter implements Converter {
 	
-	@ManagedProperty(value="#{sMenuMenuService}")
+	@Inject
+	@Named(MenuService.SPRING_KEY)
 	private MenuService menuService;
 
 	public Object getAsObject(FacesContext context, UIComponent component,

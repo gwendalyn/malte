@@ -22,9 +22,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 @Table(name = "S_MENU_MENUNODE")
 public class MenuNode implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8991390832606372727L;
 
 	/**
@@ -36,11 +33,11 @@ public class MenuNode implements Serializable {
 	private Long id;
 
 	/**
-	 * resource code
+	 * code
 	 */
 	@Column(name = "CODE")
 	private String code;
-
+	
 	/**
 	 * sub nodes
 	 */
@@ -57,21 +54,12 @@ public class MenuNode implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "MENU_CODE", referencedColumnName = "CODE")
 	private Menu menu;
-
-	/**
-	 * whether it is the bottom node
-	 */
-	@Column(name = "BTM_NODE")
-	private Boolean btmNode;
-
-	/**
-	 * whether it is the head node
-	 */
-	@Column(name = "HEAD_NODE")
-	private Boolean headNode;
 	
 	@Column(name = "LABEL")
 	private String label;
+	
+	@Column(name = "MENUBAR")
+	private Boolean menuBar = false;
 
 	public Long getId() {
 		return id;
@@ -114,22 +102,6 @@ public class MenuNode implements Serializable {
 		this.label = menu.getLabel();
 	}
 
-	public Boolean getBtmNode() {
-		return btmNode;
-	}
-
-	public void setBtmNode(Boolean btmNode) {
-		this.btmNode = btmNode;
-	}
-
-	public Boolean getHeadNode() {
-		return headNode;
-	}
-
-	public void setHeadNode(Boolean headNode) {
-		this.headNode = headNode;
-	}
-
 	public String getCode() {
 		return code;
 	}
@@ -167,5 +139,13 @@ public class MenuNode implements Serializable {
 	@Override
 	public String toString() {
 		return this.getLabel();
+	}
+
+	public Boolean getMenuBar() {
+		return menuBar;
+	}
+
+	public void setMenuBar(Boolean menuBar) {
+		this.menuBar = menuBar;
 	}
 }

@@ -31,15 +31,15 @@ public class MenuTreePanelBean implements Serializable {
 	private TreeNode selectedResource;
 
 	private TreeNode selectedMenuNode;
-
-	private MenuTreePageBean pageBean;
+	
+	private MenuBarPageBean pageBean;
 
 	/**
 	 * representing a new menu node
 	 */
 	private MenuNode current;
 
-	public MenuTreePanelBean(MenuTreePageBean pageBean) {
+	public MenuTreePanelBean(MenuBarPageBean pageBean) {
 		reset(pageBean.getCurrent());
 		this.pageBean = pageBean;
 	}
@@ -60,8 +60,7 @@ public class MenuTreePanelBean implements Serializable {
 		handleEachNode(root);
 		// 将根节点设置为头节点
 		MenuNode menuRoot = (MenuNode) root.getData();
-		menuRoot.setHeadNode(true);
-		menuRoot.setBtmNode(false);
+		menuRoot.setMenuBar(true);
 		// 保存menunode
 		pageBean.getMenuNodeService().save(menuRoot);
 		// 更新pageBean
@@ -72,7 +71,6 @@ public class MenuTreePanelBean implements Serializable {
 		int count = node.getChildCount();
 		// 末节点
 		if (count == 0) {
-			handleBtmNode(node);
 			return;
 		}
 		// 非根节点 将其子节点加入其上
@@ -80,17 +78,9 @@ public class MenuTreePanelBean implements Serializable {
 		List<TreeNode> children = node.getChildren();
 		for (TreeNode n : children) {
 			MenuNode mn = (MenuNode) n.getData();
-			mn.setHeadNode(false);
-			mn.setBtmNode(false);
 			menuNode.addSubNode(mn);
 			handleEachNode(n);
 		}
-	}
-
-	private void handleBtmNode(TreeNode node) {
-		MenuNode menuNode = (MenuNode) node.getData();
-		menuNode.setBtmNode(true);
-		menuNode.setHeadNode(false);
 	}
 
 	/**
@@ -114,8 +104,6 @@ public class MenuTreePanelBean implements Serializable {
 
 	private void initCurrentMenuNode() {
 		current = new MenuNode();
-		current.setHeadNode(false);
-		current.setBtmNode(false);
 		current.setParent(null);
 		current.setSubNodes(new ArrayList<MenuNode>());
 	}
@@ -160,8 +148,4 @@ public class MenuTreePanelBean implements Serializable {
 		this.current = current;
 	}
 
-	public static void main(String[] args) {
-		TreeNode tn = new MalteTreeNode("ICC", "csff", null);
-		System.out.println(tn);
-	}
 }

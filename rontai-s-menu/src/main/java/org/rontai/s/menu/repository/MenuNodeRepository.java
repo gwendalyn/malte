@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface MenuNodeRepository extends CrudRepository<MenuNode, Long> {
 	
-	@Query("select n from MenuNode n where n.headNode = true")
+	@Query("select n from MenuNode n where n.menuBar = true")
 	public List<MenuNode> findAllHeadNode();
 	
 	public List<MenuNode> findByParent(MenuNode parent);

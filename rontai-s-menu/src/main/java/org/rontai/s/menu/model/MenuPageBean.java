@@ -3,69 +3,58 @@ package org.rontai.s.menu.model;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ComponentSystemEvent;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-import org.primefaces.context.RequestContext;
 import org.rontai.s.menu.domain.Menu;
 import org.rontai.s.menu.service.MenuService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Scope;
 
-@ManagedBean
-@ViewScoped
-public class MenuPageBean implements Serializable{
-	
+@Named
+@Scope("view")
+public class MenuPageBean implements Serializable {
+
 	private static final long serialVersionUID = -3094847472186606739L;
 
-	@ManagedProperty(value="#{sMenuMenuService}")
+	@Inject
+	@Named(MenuService.SPRING_KEY)
 	private MenuService menuService;
-	
+
 	private Menu current;
-	
+
 	private List<Menu> menus;
-	
+
 	public MenuPageBean() {
-		
+
 	}
-	
-	public void loadData(ComponentSystemEvent event){
+
+	public void loadData(ComponentSystemEvent event) {
+		updateTable();
+	}
+
+	private void updateTable() {
 		menus = menuService.findAll();
 	}
-	
-	public void doAjaxEvent(AjaxBehaviorEvent event){
+
+	public void doAjaxEvent(AjaxBehaviorEvent event) {
 		System.out.println(current.getIsItem());
 	}
-	
-	public void doShowNewEvent(ActionEvent event){
-		//初始化表单中的current对象
+
+	public void doShowNewEvent(ActionEvent event) {
+		// 初始化表单中的current对象
 		current = new Menu();
-		//开启新增表单
-		String dlgVar = (String) event.getComponent().getAttributes().get("DLG_VAR");
-		RequestContext rc = RequestContext.getCurrentInstance();
-		rc.execute(dlgVar + ".show()");
 	}
-	
-	public void doSaveEvent(ActionEvent event){
+
+	public void doSaveEvent(ActionEvent event) {
 		menuService.save(current);
-		System.out.println("save menu success");
-		
-		String dlgVar = (String) event.getComponent().getAttributes().get("DLG_VAR");
-		RequestContext rc = RequestContext.getCurrentInstance();
-		rc.execute(dlgVar + ".hide()");
 		current = null;
-		
 		menus = menuService.findAll();
 	}
-	
-	public void doCancelEvent(ActionEvent event){
-		String dlgVar = (String) event.getComponent().getAttributes().get("DLG_VAR");
-		RequestContext rc = RequestContext.getCurrentInstance();
-		rc.execute(dlgVar + ".hide()");
+
+	public void doCancelEvent(ActionEvent event) {
 		current = null;
 	}
 
@@ -92,5 +81,5 @@ public class MenuPageBean implements Serializable{
 	public void setMenuService(MenuService menuService) {
 		this.menuService = menuService;
 	}
-	
+
 }
