@@ -16,4 +16,10 @@ public interface MenuNodeService {
 	
 	public List<MenuNode> findByParent(MenuNode parent);
 
+	/**
+	 * 保存一个menubar 同时将其保存为resource
+	 * @param menuRoot
+	 */
+	public void multiSave(MenuNode menuRoot);
+
 }

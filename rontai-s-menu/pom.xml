@@ -27,6 +27,13 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.rontai</groupId>
+			<artifactId>rontai-s-authority</artifactId>
+			<version>0.0.1.0</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.rontai</groupId>

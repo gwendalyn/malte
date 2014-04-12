@@ -2,6 +2,8 @@ package org.rontai.s.menu.service;
 
 import java.util.List;
 
+import org.rontai.s.authority.domain.Resource;
+import org.rontai.s.authority.repository.ResourceRepository;
 import org.rontai.s.menu.domain.MenuNode;
 import org.rontai.s.menu.repository.MenuNodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,9 @@ public class MenuNodeServiceImpl implements MenuNodeService {
 	
 	@Autowired
 	private MenuNodeRepository menuNodeRepository;
+	
+	@Autowired
+	private ResourceRepository resourceRepository;
 	
 	@Transactional(readOnly = true)
 	public List<MenuNode> findAllHeadNode() {
@@ -38,6 +43,16 @@ public class MenuNodeServiceImpl implements MenuNodeService {
 	@Override
 	public List<MenuNode> findByParent(MenuNode parent) {
 		return menuNodeRepository.findByParent(parent);
+	}
+
+	@Override
+	public void multiSave(MenuNode menuRoot) {
+		this.save(menuRoot);
+		Resource r = new Resource();
+		r.setCode(menuRoot.getCode());
+		r.setType(Resource.TYPE_MENUBAR);
+		resourceRepository.save(r);
+		
 	}
 
 }

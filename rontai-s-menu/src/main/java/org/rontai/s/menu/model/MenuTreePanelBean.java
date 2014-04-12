@@ -63,6 +63,7 @@ public class MenuTreePanelBean implements Serializable {
 		menuRoot.setMenuBar(true);
 		// 保存menunode
 		pageBean.getMenuNodeService().save(menuRoot);
+		pageBean.getMenuNodeService().multiSave(menuRoot);
 		// 更新pageBean
 		pageBean.updateTable();
 	}
