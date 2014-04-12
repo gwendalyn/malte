@@ -2,29 +2,26 @@ package org.rontai.s.authority.model;
 
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.event.ComponentSystemEvent;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-import org.rontai.s.authority.AuthorityUtil;
 import org.rontai.s.authority.domain.User;
 import org.rontai.s.authority.service.UserService;
+import org.springframework.context.annotation.Scope;
 
-@ManagedBean
-@ViewScoped
+@Named
+@Scope("view")
 public class UserPageBean {
 
 	private List<User> users;
 	
+	@Inject
+	@Named(UserService.SPRING_KEY)
 	private static UserService userService;
 	
-	public UserPageBean(){
-		initService();
+	public void loadDate(ComponentSystemEvent event){
 		users = userService.findAll();
-	}
-
-	private static synchronized void initService() {
-		if(userService == null)
-			userService = AuthorityUtil.getUserService();
 	}
 
 	public List<User> getUsers() {
@@ -33,6 +30,14 @@ public class UserPageBean {
 
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+
+	public static UserService getUserService() {
+		return userService;
+	}
+
+	public static void setUserService(UserService userService) {
+		UserPageBean.userService = userService;
 	}
 
 }
