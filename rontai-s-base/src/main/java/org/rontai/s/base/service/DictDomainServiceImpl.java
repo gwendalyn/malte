@@ -20,7 +20,6 @@ public class DictDomainServiceImpl implements DictDomainService {
 
 	@Override
 	public List<DictDomain> findByDictNameAndLang(String dictName, Integer lang) {
-		
 		List<DictDomain> dicts = dictDomainRepository.findByDictNameAndLang(dictName, lang);
 		return dicts;
 	}
